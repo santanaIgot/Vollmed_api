@@ -1,9 +1,6 @@
 package br.com.med.voll.apiVollMed.controller;
 
-import br.com.med.voll.apiVollMed.medico.DadosCadastroMedico;
-import br.com.med.voll.apiVollMed.medico.DadosListagemMedico;
-import br.com.med.voll.apiVollMed.medico.Medico;
-import br.com.med.voll.apiVollMed.medico.MedicoRepository;
+import br.com.med.voll.apiVollMed.medico.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -28,5 +25,12 @@ public class MedicoController {
     @GetMapping
     public Page<DadosListagemMedico> listar(Pageable paginacao){
         return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
+        var medico = medicoRepository.getReferenceById(dados.id());
+        medico.atualizarDados(dados);
     }
 }
