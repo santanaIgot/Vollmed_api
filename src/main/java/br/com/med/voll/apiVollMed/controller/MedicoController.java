@@ -7,9 +7,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
@@ -18,19 +19,34 @@ public class MedicoController {
     private MedicoRepository medicoRepository;
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
-        medicoRepository.save(new Medico(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados,
+                                    UriComponentsBuilder uriBuilder){
+        var medico = new Medico(dados);
+        medicoRepository.save(medico);
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
     }
 
     @GetMapping
-    public Page<DadosListagemMedico> listar(Pageable paginacao){
-        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+    public  ResponseEntity<Page<DadosListagemMedico>> listar(Pageable paginacao){
+        var page = medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
         var medico = medicoRepository.getReferenceById(dados.id());
         medico.atualizarDados(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        medicoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

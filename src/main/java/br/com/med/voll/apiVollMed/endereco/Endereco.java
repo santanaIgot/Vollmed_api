@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "MEDICOS")
 public class Endereco {
 
     private String logradouro;
@@ -21,6 +22,34 @@ public class Endereco {
     private String cidade;
     private String uf;
 
+    public void atualizarDados(DadosEndereco dadosEndereco ){
+        if(dadosEndereco.logradouro() != null){
+            this.logradouro = dadosEndereco.logradouro();
+        }
+        if(dadosEndereco.bairro() != null){
+            this.bairro = dadosEndereco.bairro();
+        }
+        if(dadosEndereco.cep() != null){
+            this.cep = dadosEndereco.cep();
+        }
+
+        if(dadosEndereco.cidade() != null){
+            this.cidade = dadosEndereco.cidade();
+        }
+
+        if (dadosEndereco.numero() != null){
+            this.numero = dadosEndereco.numero();
+        }
+
+        if(dadosEndereco.uf() != null){
+            this.uf = dadosEndereco.uf();
+        }
+
+
+
+    }
+
+
     public Endereco(DadosEndereco dados) {
         this.logradouro = dados.logradouro();
         this.bairro = dados.bairro();
@@ -28,6 +57,6 @@ public class Endereco {
         this.uf = dados.uf();
         this.cidade = dados.cidade();
         this.numero = dados.numero();
-        this.complemento = dados.complemento();
+
     }
 }
