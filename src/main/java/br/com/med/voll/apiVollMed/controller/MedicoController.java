@@ -49,4 +49,10 @@ public class MedicoController {
         medicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        medicoRepository.deleteById(id);
+    }
 }
