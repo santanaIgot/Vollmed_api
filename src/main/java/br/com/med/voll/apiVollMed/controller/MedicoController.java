@@ -1,6 +1,12 @@
 package br.com.med.voll.apiVollMed.controller;
 
-import br.com.med.voll.apiVollMed.medico.*;
+import br.com.med.voll.apiVollMed.dto.medico.DadosAtualizacaoMedico;
+import br.com.med.voll.apiVollMed.dto.medico.DadosCadastroMedico;
+import br.com.med.voll.apiVollMed.dto.medico.DadosDetalhamentoMedico;
+import br.com.med.voll.apiVollMed.dto.medico.DadosListagemMedico;
+
+import br.com.med.voll.apiVollMed.model.medico.*;
+import br.com.med.voll.apiVollMed.repository.MedicoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -50,9 +56,5 @@ public class MedicoController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public void excluir(@PathVariable Long id){
-        medicoRepository.deleteById(id);
-    }
+
 }

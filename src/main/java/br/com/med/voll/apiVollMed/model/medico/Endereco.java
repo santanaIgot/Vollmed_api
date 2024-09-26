@@ -1,5 +1,6 @@
-package br.com.med.voll.apiVollMed.endereco;
+package br.com.med.voll.apiVollMed.model.medico;
 
+import br.com.med.voll.apiVollMed.dto.endereco.DadosEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

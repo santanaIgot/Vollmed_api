@@ -1,6 +1,7 @@
-package br.com.med.voll.apiVollMed.medico;
+package br.com.med.voll.apiVollMed.model.medico;
 
-import br.com.med.voll.apiVollMed.endereco.Endereco;
+import br.com.med.voll.apiVollMed.dto.medico.DadosAtualizacaoMedico;
+import br.com.med.voll.apiVollMed.dto.medico.DadosCadastroMedico;
 import jakarta.persistence.*;
 import lombok.*;
 

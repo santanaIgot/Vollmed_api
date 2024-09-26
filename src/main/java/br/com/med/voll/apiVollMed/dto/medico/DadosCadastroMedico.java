@@ -1,7 +1,8 @@
-package br.com.med.voll.apiVollMed.medico;
+package br.com.med.voll.apiVollMed.dto.medico;
 
 
-import br.com.med.voll.apiVollMed.endereco.DadosEndereco;
+import br.com.med.voll.apiVollMed.dto.endereco.DadosEndereco;
+import br.com.med.voll.apiVollMed.model.medico.Especialidade;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
