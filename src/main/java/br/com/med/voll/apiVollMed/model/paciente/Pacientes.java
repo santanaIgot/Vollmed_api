@@ -2,7 +2,6 @@ package br.com.med.voll.apiVollMed.model.paciente;
 
 import br.com.med.voll.apiVollMed.dto.paciente.CadastroPacienteDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 
-public class Paciente {
+public class Pacientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +25,7 @@ public class Paciente {
     @Embedded
     private EnderecoPaciente enderecoPaciente;
 
-    public Paciente(CadastroPacienteDto dto) {
+    public Pacientes(CadastroPacienteDto dto) {
         nome = dto.nome();
         cpf = dto.cpf();
         dataNascimento = dto.dataNascimento();
