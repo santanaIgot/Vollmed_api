@@ -30,4 +30,6 @@ public class PacienteController {
 
         return ResponseEntity.created(uri).body(new DetalhesPacienteDto(paciente));
     }
+
+
 }
