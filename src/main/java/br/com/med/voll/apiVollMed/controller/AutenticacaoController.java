@@ -17,6 +17,7 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    //
     @PostMapping
     public ResponseEntity logar(@RequestBody @Valid DadosDtoAutenticacao dto) {
 
