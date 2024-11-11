@@ -39,6 +39,7 @@ public class MedicoController {
         var medico = medicoRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }
+
     @GetMapping
     public  ResponseEntity<Page<DadosListagemMedico>> listar(Pageable paginacao){
         var page = medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
