@@ -1,6 +1,8 @@
 package br.com.med.voll.apiVollMed.controller;
 
 import br.com.med.voll.apiVollMed.dto.usuario.DadosDtoAutenticacao;
+import br.com.med.voll.apiVollMed.model.usuario.Usuario;
+import br.com.med.voll.apiVollMed.service.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     //
     @PostMapping
     public ResponseEntity logar(@RequestBody @Valid DadosDtoAutenticacao dto) {
@@ -22,7 +27,7 @@ public class AutenticacaoController {
 
         var authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.getToken((Usuario) authentication.getPrincipal()));
 
     }
 }
