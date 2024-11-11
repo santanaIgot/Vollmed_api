@@ -1,5 +1,6 @@
 package br.com.med.voll.apiVollMed.controller;
 
+import br.com.med.voll.apiVollMed.dto.DadosDtoToken;
 import br.com.med.voll.apiVollMed.dto.usuario.DadosDtoAutenticacao;
 import br.com.med.voll.apiVollMed.model.usuario.Usuario;
 import br.com.med.voll.apiVollMed.service.TokenService;
@@ -23,11 +24,13 @@ public class AutenticacaoController {
     //
     @PostMapping
     public ResponseEntity logar(@RequestBody @Valid DadosDtoAutenticacao dto) {
-        var token = new UsernamePasswordAuthenticationToken(dto.login(), dto.senha());
+        var athenticationToken = new UsernamePasswordAuthenticationToken(dto.login(), dto.senha());
 
-        var authentication = manager.authenticate(token);
+        var authentication = manager.authenticate(athenticationToken);
 
-        return ResponseEntity.ok(tokenService.getToken((Usuario) authentication.getPrincipal()));
+        var tokenJWT = tokenService.getToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new DadosDtoToken(tokenJWT));
 
     }
 }
